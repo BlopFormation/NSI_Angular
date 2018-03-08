@@ -4,6 +4,7 @@ export class Produit {
   private _Prix: number;
   private _Description: string;
   private _EnSolde: boolean;
+  private _TauxSolde: number;
 
   constructor(obj?: any){
     this._CodeBarre = obj && obj._CodeBarre || "";
@@ -11,6 +12,7 @@ export class Produit {
     this._Prix = obj && obj._Prix || 0;
     this._Description = obj && obj._Description || "";
     this._EnSolde = obj && obj._EnSolde || false;
+    this._TauxSolde = 0.2;
   }
 
   get CodeBarre(): string {
@@ -46,5 +48,11 @@ export class Produit {
   }
   set EnSolde(value: boolean) {
     this._EnSolde = value;
+  }
+
+
+  get TauxSolde(): number {
+    console.log(this._TauxSolde);
+    return this._TauxSolde;
   }
 }

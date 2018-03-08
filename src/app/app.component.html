@@ -16,12 +16,12 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let item of stocks" [ngClass]="{enSolde: item.Produit.EnSolde}">
+    <tr *ngFor="let item of stocks | slice:(PageNbUp - 5):PageNbUp" [ngClass]="{enSolde: item.Produit.EnSolde}">
       <td>{{ item.Produit.CodeBarre | firstUpper }}</td>
       <td>{{ item.Produit.Titre }}</td>
       <td>{{ item.Produit.Description }}</td>
-      <td>{{ item.Produit.Prix }}</td>
-      <td>{{ item.Quantite }}</td>
+      <td>{{ item.Produit.Prix | solde:(item.Produit.EnSolde):(item.Produit.TauxSolde) | currency:"EUR":true:"1.0-2"}}</td>
+      <td><img src="{{ item.Quantite | disponibilite }}"> reste: {{ item.Quantite }}</td>
       <td>
         <div id="achat" *ngIf="item.Quantite > 0">
           <label>Quantité d'achat: </label>
@@ -43,3 +43,7 @@
     </tr>
   </tbody>
 </table>
+<div id="pagerCommander">
+  <button *ngIf="PageNbUp < stocks.length" (click)="changePage(up)" #up>+</button>
+  <button *ngIf="PageNbUp > 5" (click)="changePage(down)" #down>-</button>
+</div>

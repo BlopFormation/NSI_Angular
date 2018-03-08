@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   private _stocks: Array<ProduitStock>;
   private _checkedSolde: boolean;
   private _checkedCommande: boolean;
+  private _PageNbUp: number;
 
   constructor(){
   }
@@ -40,8 +41,13 @@ export class AppComponent implements OnInit{
     this._checkedSolde = false;
     this._checkedCommande = false;
     this.UpdateProduits(this._checkedSolde, this._checkedCommande);
+    this._PageNbUp = 5;
   }
 
+
+  get PageNbUp(): number {
+    return this._PageNbUp;
+  }
 
   get magasin(): Magasin {
     return this._magasin;
@@ -88,5 +94,17 @@ export class AppComponent implements OnInit{
       produits = this.magasin.Produits;
 
     this._stocks = produits;
+  }
+
+  changePage(button: HTMLButtonElement){
+    let text = button.innerText;
+
+    console.log(this._PageNbUp);
+    switch (text){
+      case "-": this._PageNbUp -= 5; break;
+      case "+": this._PageNbUp += 5; break;
+    }
+
+    console.log(this._PageNbUp);
   }
 }
