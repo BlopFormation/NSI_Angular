@@ -1,12 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Pipe({
   name: 'disponibilite'
 })
 export class DisponibilitePipe implements PipeTransform {
 
+  constructor(private sanitizer: DomSanitizer){}
   transform(value: number, args?: any): string {
-    let image = "./assets/imgs/";
+    let image = "<img src='./assets/imgs/";
 
     switch (true){
       case value > 5: image += "green.png"; break;
@@ -14,6 +16,7 @@ export class DisponibilitePipe implements PipeTransform {
       default: image += "red.png";
     }
 
+    image += "'>";
     return image;
   }
 

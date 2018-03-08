@@ -1,49 +1,10 @@
-<h1>Produits - {{ magasin.Nom }}</h1>
-
-<label for="solde">Chercher les produits en solde ?</label><input name="solde" id="solde" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #checkbox>
-<label for="commander">Chercher les produits a commander ?</label><input name="commander" id="commander" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #commander>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code barre</th>
-      <th>Titre</th>
-      <th>Description</th>
-      <th>Prix</th>
-      <th>Quantite en stock</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let item of stocks | slice:(PageNbUp - 5):PageNbUp" [ngClass]="{enSolde: item.Produit.EnSolde}">
-      <td>{{ item.Produit.CodeBarre | firstUpper }}</td>
-      <td>{{ item.Produit.Titre }}</td>
-      <td>{{ item.Produit.Description }}</td>
-      <td>{{ item.Produit.Prix | solde:(item.Produit.EnSolde):(item.Produit.TauxSolde) | currency:"EUR":true:"1.0-2"}}</td>
-      <td><img src="{{ item.Quantite | disponibilite }}"> reste: {{ item.Quantite }}</td>
-      <td>
-        <div id="achat" *ngIf="item.Quantite > 0">
-          <label>Quantité d'achat: </label>
-          <input type="number" #iAchat>
-          <button (click)="Acheter(item, iAchat)">Acheter</button>
-        </div>
-        <div id="commande" *ngIf="item.Quantite <= 5">
-          <label>Quantité à commander: </label>
-          <input type="number" #iCommande>
-          <button (click)="Commander(item, iCommande)">Commander</button>
-        </div>
-        <div id="Supprimer" *ngIf="item.Quantite <= 0">
-          <button (click)="Supprimer(item)">Supprimer</button>
-        </div>
-        <div id="Solder">
-          <button (click)="MettreEnSolde(item, button)" #button>Mettre en solde</button>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div id="pagerCommander">
-  <button *ngIf="PageNbUp < stocks.length" (click)="changePage(up)" #up>+</button>
-  <button *ngIf="PageNbUp > 5" (click)="changePage(down)" #down>-</button>
+<div class="nav navbar-nav">
+  <ul>
+    <li><a routerLink="/home">Home</a></li>
+    <li><a routerLink="/produits/liste">Liste de produit</a></li>
+  </ul>
 </div>
+<div>
+  {{ 2.055 | solde:true:0.5 }}
+</div>
+<router-outlet></router-outlet>

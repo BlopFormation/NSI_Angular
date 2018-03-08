@@ -3,21 +3,25 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
-import { FirstUpperPipe } from './filters/first-upper.pipe';
-import { DisponibilitePipe } from './filters/disponibilite.pipe';
-import { SoldePipe } from './filters/solde.pipe';
+import { HomeComponent } from './components/home/home.component';
+import {RouterModule, Routes} from '@angular/router';
+import {ProduitModule} from './modules/produit/produit.module';
 
+const AppRouting: Routes = [
+  {path: "home", redirectTo: "", pathMatch: "full"},
+  {path: "", component: HomeComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    FirstUpperPipe,
-    DisponibilitePipe,
-    SoldePipe,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ProduitModule,
+    RouterModule.forRoot(AppRouting)
   ],
   providers: [],
   bootstrap: [AppComponent]

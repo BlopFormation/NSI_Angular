@@ -1,0 +1,27 @@
+<h1>Produits - {{ magasin.Nom }}</h1>
+
+<label for="solde">Chercher les produits en solde ?</label><input name="solde" id="solde" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #checkbox>
+<label for="commander">Chercher les produits a commander ?</label><input name="commander" id="commander" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #commander>
+
+<table>
+  <thead>
+  <tr>
+    <th>Code barre</th>
+    <th>Titre</th>
+    <th>Description</th>
+    <th>Prix</th>
+    <th>Quantite en stock</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <produit-view *ngFor="let item of stocks | slice:(PageNbUp - 5):PageNbUp" [item]="item" (click)="Supprimer($event)">
+
+  </produit-view>
+  </tbody>
+</table>
+<div id="pagerCommander">
+  <button *ngIf="PageNbUp < stocks.length" (click)="changePage(up)" #up>+</button>
+  <button *ngIf="PageNbUp > 5" (click)="changePage(down)" #down>-</button>
+</div>
