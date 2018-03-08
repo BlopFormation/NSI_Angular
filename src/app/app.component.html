@@ -1,18 +1,44 @@
-<div>
-  {{ Produit.CodeBarre }}
-</div>
-<div [style.background-color]="BgColor">
-  {{ Produit.Titre }}
-</div>
-<div [ngStyle]="{'color': TextColor, 'font-weight': 'bold'}">
-  {{ Produit.Description }}
-</div>
-<div [ngClass]="{Solde: 21 > 2}">
-  {{ Produit.EnSolde }}
-</div>
+<h1>Produits - {{ magasin.Nom }}</h1>
 
-<div>
-  <input [(ngModel)]="Produit.Titre">
-  <input type="color" [(ngModel)]="BgColor">
-  <input type="color" [(ngModel)]="TextColor">
-</div>
+<label for="solde">Chercher les produits en solde ?</label><input name="solde" id="solde" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #checkbox>
+<label for="commander">Chercher les produits a commander ?</label><input name="commander" id="commander" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #commander>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code barre</th>
+      <th>Titre</th>
+      <th>Description</th>
+      <th>Prix</th>
+      <th>Quantite en stock</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of stocks" [ngClass]="{enSolde: item.Produit.EnSolde}">
+      <td>{{ item.Produit.CodeBarre | firstUpper }}</td>
+      <td>{{ item.Produit.Titre }}</td>
+      <td>{{ item.Produit.Description }}</td>
+      <td>{{ item.Produit.Prix }}</td>
+      <td>{{ item.Quantite }}</td>
+      <td>
+        <div id="achat" *ngIf="item.Quantite > 0">
+          <label>Quantité d'achat: </label>
+          <input type="number" #iAchat>
+          <button (click)="Acheter(item, iAchat)">Acheter</button>
+        </div>
+        <div id="commande" *ngIf="item.Quantite <= 5">
+          <label>Quantité à commander: </label>
+          <input type="number" #iCommande>
+          <button (click)="Commander(item, iCommande)">Commander</button>
+        </div>
+        <div id="Supprimer" *ngIf="item.Quantite <= 0">
+          <button (click)="Supprimer(item)">Supprimer</button>
+        </div>
+        <div id="Solder">
+          <button (click)="MettreEnSolde(item, button)" #button>Mettre en solde</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

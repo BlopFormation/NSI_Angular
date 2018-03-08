@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
+import { FirstUpperPipe } from './filters/first-upper.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    FirstUpperPipe,
   ],
   imports: [
     BrowserModule,
