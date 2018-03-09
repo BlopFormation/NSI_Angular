@@ -1,0 +1,15 @@
+<div *ngIf="form.invalid">
+  <div *ngFor="let error of errors">
+    <span>{{ error.key }} - {{ error.value }}</span>
+  </div>
+</div>
+
+<form [formGroup]="form" (submit)="submitForm()">
+  <div class="form-group">
+    <label>BLOP</label>
+    <input formControlName="titre" [class]="{'has-error': form.controls['titre'].invalid, 'has-success': form.controls['titre'].valid}" #iTitre>
+  </div>
+  <div>
+    <button type="submit">Soumettre</button>
+  </div>
+</form>
