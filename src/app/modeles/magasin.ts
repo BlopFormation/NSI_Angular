@@ -7,6 +7,14 @@ export class Magasin {
   constructor(obj?: any){
     this._Nom = obj && obj._Nom || "";
     this._Produits = new Array<ProduitStock>();
+
+    if(obj && obj._Produits)this.InitProduits(obj._Produits);
+  }
+
+  private InitProduits(_produits: any){
+    _produits.forEach(value => {
+      this._Produits.push(<ProduitStock>value);
+    });
   }
 
   get Nom(): string {

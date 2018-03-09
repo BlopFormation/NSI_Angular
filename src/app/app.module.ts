@@ -7,6 +7,8 @@ import { HomeComponent } from './components/home/home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ProduitModule} from './modules/produit/produit.module';
 
+import {  } from 'ngx-bootstrap';
+
 const AppRouting: Routes = [
   {path: "home", redirectTo: "", pathMatch: "full"},
   {path: "", component: HomeComponent}

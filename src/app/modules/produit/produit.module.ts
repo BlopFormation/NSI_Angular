@@ -8,13 +8,17 @@ import {FirstUpperPipe} from './filters/first-upper.pipe';
 import {DisponibilitePipe} from './filters/disponibilite.pipe';
 import {RouterModule, Routes} from '@angular/router';
 import { ProduitViewComponent } from './components/produit-view/produit-view.component';
+import {MagasinService} from './services/magasin.service';
+import { EditComponent } from './components/edit/edit.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     ProduitRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ListeComponent,
@@ -22,8 +26,10 @@ import { ProduitViewComponent } from './components/produit-view/produit-view.com
     SoldePipe,
     FirstUpperPipe,
     DisponibilitePipe,
-    ProduitViewComponent
+    ProduitViewComponent,
+    EditComponent,
   ],
+  providers: [ MagasinService ],
   exports: [ SoldePipe, FirstUpperPipe, DisponibilitePipe ]
 })
 export class ProduitModule { }

@@ -1,31 +1,43 @@
-<tr [ngClass]="{enSolde: produitStock.Produit.EnSolde}">
-  <td>{{ produitStock.Produit.CodeBarre | firstUpper }}</td>
-  <td>{{ produitStock.Produit.Titre }}</td>
-  <td>{{ produitStock.Produit.Description }}</td>
-  <td>{{ produitStock.Produit.Prix | solde:(produitStock.Produit.EnSolde):(produitStock.Produit.TauxSolde) | currency:"EUR":true:"1.0-2"}}</td>
-  <td>
+<div class="row" [ngClass]="{enSolde: produitStock.Produit.EnSolde}">
+  <div class="col-2">
+    {{ produitStock.Produit.CodeBarre | firstUpper }}
+  </div>
+  <div class="col-2">
+    {{ produitStock.Produit.Titre }}
+  </div>
+  <div class="col-4">
+    {{ produitStock.Produit.Description }}
+  </div>
+  <div class="col-2">
+    {{ produitStock.Produit.Prix | solde:(produitStock.Produit.EnSolde):(produitStock.Produit.TauxSolde) | currency:"EUR":true:"1.0-2"}}
+  </div>
+  <div class="col-2">
     <!-- Autoriser les elements html -->
-    <span [innerHTML]="produitStock.Quantite | disponibilite"></span> reste: {{ produitStock.Quantite }}</td>
-  <td>
-    <div id="achat" *ngIf="produitStock.Quantite > 0">
+    <span [innerHTML]="produitStock.Quantite | disponibilite"></span> reste: {{ produitStock.Quantite }}
+  </div>
+</div>
+<hr>
+<div class="row justify-content-between">
+  <div class="col-6">
+    <span id="achat" *ngIf="produitStock.Quantite > 0">
       <label>Quantité d'achat: </label>
       <input type="number" #iAchat>
       <button (click)="Acheter(produitStock, iAchat)">Acheter</button>
-    </div>
-    <div id="commande" *ngIf="produitStock.Quantite <= 5">
+    </span>
+  </div>
+  <div class="col-6">
+    <span id="commande" *ngIf="produitStock.Quantite <= 5">
       <label>Quantité à commander: </label>
       <input type="number" #iCommande>
       <button (click)="Commander(produitStock, iCommande)">Commander</button>
-    </div>
-    <div id="Supprimer" *ngIf="produitStock.Quantite <= 0">
+    </span>
+    <span id="Supprimer" *ngIf="produitStock.Quantite <= 0">
       <button (click)="Supprimer(produitStock)">Supprimer</button>
-    </div>
-    <div id="Solder">
+    </span>
+    <span id="Solder">
       <button (click)="MettreEnSolde(produitStock, button)" #button>Mettre en solde</button>
-    </div>
-  </td>
-  <td>
-    <a [routerLink]="['/produits/detail', produitStock.Produit.CodeBarre]">Détail</a>
-    <!--<button (click)="ToDetail(item)">DETAIL</button>-->
-  </td>
-</tr>
+      <a [routerLink]="['/produits/detail', produitStock.Produit.CodeBarre]">Détail</a>
+    </span>
+  </div>
+</div>
+<hr>

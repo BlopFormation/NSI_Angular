@@ -1,27 +1,36 @@
-<h1>Produits - {{ magasin.Nom }}</h1>
+<section class="container">
+  <div class="row">
+    <h1>Produits</h1>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="solde">Chercher les produits en solde ?</label>
+        <input name="solde" id="solde" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #checkbox>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="commander">Chercher les produits a commander ?</label>
+        <input name="commander" id="commander" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #commander>
+      </div>
+    </div>
+  </div>
+</section>
 
-<label for="solde">Chercher les produits en solde ?</label><input name="solde" id="solde" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #checkbox>
-<label for="commander">Chercher les produits a commander ?</label><input name="commander" id="commander" type="checkbox" (change)="UpdateProduits(checkbox.checked, commander.checked)" #commander>
 
-<table>
-  <thead>
-  <tr>
-    <th>Code barre</th>
-    <th>Titre</th>
-    <th>Description</th>
-    <th>Prix</th>
-    <th>Quantite en stock</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <produit-view *ngFor="let item of stocks | slice:(PageNbUp - 5):PageNbUp" [produitStock]="item" (click)="Supprimer($event)">
-
-  </produit-view>
-  </tbody>
-</table>
-<div id="pagerCommander">
-  <button *ngIf="PageNbUp < stocks.length" (click)="changePage(up)" #up>+</button>
-  <button *ngIf="PageNbUp > 5" (click)="changePage(down)" #down>-</button>
-</div>
+<section class="container">
+  <div class="row" style="font-weight: bold">
+    <div class="col-2">Code barre</div>
+    <div class="col-2">Titre</div>
+    <div class="col-4">Description</div>
+    <div class="col-2">Prix</div>
+    <div class="col-2">Quantite en stock</div>
+  </div>
+  <produit-view class="container" *ngFor="let item of stocks | slice:(PageNbUp - 5):PageNbUp" [produitStock]="item"
+                (deleteEvent)="Supprimer($event)"></produit-view>
+  <div class="row" id="pagerCommander">
+    <button *ngIf="PageNbUp < stocks.length" (click)="changePage(up)" #up>+</button>
+    <button *ngIf="PageNbUp > 5" (click)="changePage(down)" #down>-</button>
+  </div>
+</section>

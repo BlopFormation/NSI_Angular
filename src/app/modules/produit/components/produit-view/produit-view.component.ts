@@ -8,7 +8,7 @@ import {ProduitStock} from '../../../../modeles/produit-stock';
 })
 export class ProduitViewComponent implements OnInit {
   @Input() produitStock: ProduitStock;
-  @Output() click: EventEmitter<ProduitStock> = new EventEmitter<ProduitStock>();
+  @Output() deleteEvent: EventEmitter<ProduitStock> = new EventEmitter<ProduitStock>();
 
   constructor() { }
 
@@ -25,7 +25,7 @@ export class ProduitViewComponent implements OnInit {
     // let index = this.magasin.Produits.findIndex(value => item.Produit.CodeBarre == value.Produit.CodeBarre);
     // this.magasin.Produits.splice(index, 1);
     // this.UpdateProduits(this._checkedSolde, this._checkedCommande);
-    this.click.emit(item);
+    this.deleteEvent.emit(item);
   }
   MettreEnSolde(item: ProduitStock, button: HTMLButtonElement){
     item.Produit.EnSolde = !item.Produit.EnSolde;
