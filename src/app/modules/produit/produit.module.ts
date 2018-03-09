@@ -11,6 +11,7 @@ import { ProduitViewComponent } from './components/produit-view/produit-view.com
 import {MagasinService} from './services/magasin.service';
 import { EditComponent } from './components/edit/edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CreateComponent } from './components/create/create.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     DisponibilitePipe,
     ProduitViewComponent,
     EditComponent,
+    CreateComponent,
   ],
   providers: [ MagasinService ],
   exports: [ SoldePipe, FirstUpperPipe, DisponibilitePipe ]

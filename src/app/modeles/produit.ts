@@ -52,7 +52,6 @@ export class Produit {
 
 
   get TauxSolde(): number {
-    console.log(this._TauxSolde);
     return this._TauxSolde;
   }
 }

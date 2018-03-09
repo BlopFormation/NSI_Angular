@@ -21,6 +21,7 @@ export class ListeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this._stocks = [];
     this._checkedSolde = false;
     this._checkedCommande = false;
     this.UpdateProduits(this._checkedSolde, this._checkedCommande);

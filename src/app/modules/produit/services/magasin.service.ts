@@ -16,6 +16,7 @@ export class MagasinService {
     if(!obj){
       this.LoadMagasin();
     }else{
+      // localStorage.clear();
       let objParse = JSON.parse(obj);
       this._Magasin = new Magasin(objParse);
     }
@@ -26,17 +27,17 @@ export class MagasinService {
 
     let produitStocks = [];
     for(let i = 0; i < 42; i++) {
-      produitStocks.push(<ProduitStock>{
-        Produit: <Produit>{
-          CodeBarre: "cb" + i,
-          Titre: "Produit" + i,
-          Prix: 10 + i,
-          Description: "Description du produit " + i,
-          EnSolde: false,
-          TauxSolde: 0.2
-        },
-        Quantite: 10
-      });
+      produitStocks.push(new ProduitStock({
+        _Produit: new Produit({
+          _CodeBarre: "cb" + i,
+          _Titre: "Produit" + i,
+          _Prix: 10 + i,
+          _Description: "Description du produit " + i,
+          _EnSolde: false,
+          _TauxSolde: 0.2
+        }),
+        _Quantite: 10
+      }));
     }
 
     this._Magasin.Produits = <Array<ProduitStock>>produitStocks;
@@ -58,6 +59,16 @@ export class MagasinService {
     if(index >= 0){
       this._Magasin.Produits.splice(index, 1);
     }
+    localStorage.setItem("magasin", JSON.stringify(this._Magasin));
+  }
+
+  AddProduit(produit: Produit, quantite: number){
+    console.log(produit);
+    this._Magasin.Produits.push(new ProduitStock({
+      _Produit: produit,
+      _Quantite: quantite
+    }));
+
     localStorage.setItem("magasin", JSON.stringify(this._Magasin));
   }
 }

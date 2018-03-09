@@ -5,7 +5,7 @@ export class ProduitStock {
   private _Quantite: number;
 
   constructor(obj: any){
-    this._Produit = obj && obj._Produits;
+    this._Produit = obj && obj._Produit;
     this._Quantite = obj && obj._Quantite || 10;
   }
 
