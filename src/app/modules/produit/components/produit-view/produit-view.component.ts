@@ -7,7 +7,7 @@ import {ProduitStock} from '../../../../modeles/produit-stock';
   styleUrls: ['./produit-view.component.css']
 })
 export class ProduitViewComponent implements OnInit {
-  @Input() item: ProduitStock;
+  @Input() produitStock: ProduitStock;
   @Output() click: EventEmitter<ProduitStock> = new EventEmitter<ProduitStock>();
 
   constructor() { }

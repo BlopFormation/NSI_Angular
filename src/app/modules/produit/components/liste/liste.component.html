@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-  <produit-view *ngFor="let item of stocks | slice:(PageNbUp - 5):PageNbUp" [item]="item" (click)="Supprimer($event)">
+  <produit-view *ngFor="let item of stocks | slice:(PageNbUp - 5):PageNbUp" [produitStock]="item" (click)="Supprimer($event)">
 
   </produit-view>
   </tbody>
