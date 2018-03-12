@@ -4,6 +4,7 @@ import {Produit} from '../../../../modeles/produit';
 import {Magasin} from '../../../../modeles/magasin';
 import {Router} from '@angular/router';
 import {MagasinService} from '../../services/magasin.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'produit-liste',
@@ -15,12 +16,19 @@ export class ListeComponent implements OnInit {
   private _checkedSolde: boolean;
   private _checkedCommande: boolean;
   private _PageNbUp: number;
+  Meteo: any;
 
-  constructor(private router: Router, private magasinService: MagasinService){
+  constructor(private router: Router, private magasinService: MagasinService, private httpClient: HttpClient){
   }
 
 
   ngOnInit(): void {
+    this.httpClient
+      .get("http://api.openweathermap.org/data/2.5/forecast?q=Brussels,BE&appid=24429ded848ec72a743564dbe43fe86d")
+      .subscribe((data) => {
+        this.Meteo = data;
+      });
+
     this._stocks = [];
     this._checkedSolde = false;
     this._checkedCommande = false;

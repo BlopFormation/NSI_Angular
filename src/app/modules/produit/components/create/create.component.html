@@ -1,0 +1,27 @@
+<form [formGroup]="CreateForm" (submit)="CreateProduit()">
+  <div class="form-group">
+    <label for="Titre">Titre: </label>
+    <input id="Titre" formControlName="Titre" [(ngModel)]="Produit.Titre">
+  </div>
+  <div class="form-group">
+    <label for="codeBarre">CodeBarre: </label>
+    <input id="codeBarre" formControlName="CodeBarre" [(ngModel)]="Produit.CodeBarre">
+  </div>
+  <div class="form-group">
+    <label for="Description">Description: </label>
+    <input id="Description" formControlName="Description" [(ngModel)]="Produit.Description">
+  </div>
+  <div class="form-group">
+    <label for="Prix">Prix: </label>
+    <input id="Prix" type="number" formControlName="Prix" [(ngModel)]="Produit.Prix">
+  </div>
+  <div class="form-group">
+    <label for="EnSolde">EnSolde: </label>
+    <input id="EnSolde" type="checkbox" formControlName="EnSolde" [(ngModel)]="Produit.EnSolde">
+  </div>
+  <div class="form-group">
+    <label for="TauxSolde">TauxSolde: </label>
+    <input id="TauxSolde" formControlName="TauxSolde" [(ngModel)]="Produit.TauxSolde">
+  </div>
+  <button *ngIf="CreateForm.valid" type="submit">Créer</button>
+</form>

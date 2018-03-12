@@ -12,6 +12,8 @@ import {MagasinService} from './services/magasin.service';
 import { EditComponent } from './components/edit/edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CreateComponent } from './components/create/create.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { CreateComponent } from './components/create/create.component';
     CommonModule,
     ProduitRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [
     ListeComponent,
@@ -31,7 +34,7 @@ import { CreateComponent } from './components/create/create.component';
     EditComponent,
     CreateComponent,
   ],
-  providers: [ MagasinService ],
+  providers: [ MagasinService, HttpClient ],
   exports: [ SoldePipe, FirstUpperPipe, DisponibilitePipe ]
 })
 export class ProduitModule { }
